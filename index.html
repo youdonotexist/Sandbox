@@ -7,10 +7,16 @@
 
     <script>
 		function checkBuffer() {
-			var buffer = VideoManager.getBuffer();
-			console.log(buffer)
 
+			if (VideoManager) {
+				var buffer = VideoManager.getLatestBuffer();
+				console.log(buffer)
+			}
+
+            setTimeout(checkBuffer, 100)
         }
+
+		checkBuffer();
     </script>
 </html>
 
