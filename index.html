@@ -27,31 +27,26 @@
 	    var sourceBuffer = null;
 	    function sourceOpen (_) {
 		    sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
-		    video.addEventListener('timeupdate', checkBuffer);
+		    //video.addEventListener('timeupdate', checkBuffer);
 		    video.addEventListener('canplay', function () {
-			    segmentDuration = video.duration / totalSegments;
 			    video.play();
 		    });
 
-		    checkBuffer(true)
+		    checkBuffer()
 	    }
 
-		function checkBuffer(repeat) {
+		function checkBuffer() {
 			if (typeof VideoManager != "undefined") {
 				var buffer = VideoManager.getLatestBuffer();
 				if (typeof buffer != "undefined") {
-					sourceBuffer.appendBuffer(str2ab(buffer));
-					repeat = false
+					sourceBuffer.append(str2ab(buffer));
 				}
 				else {
 				    console.log("No Buffer To Load");
-                    repeat = true
                 }
 			}
 
-			if (repeat) {
-				setTimeout(checkBuffer, 100)
-			}
+            setTimeout(checkBuffer, 100)
 		}
 
 	    function str2ab(str) {
