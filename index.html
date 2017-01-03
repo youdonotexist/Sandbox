@@ -8,7 +8,7 @@
     <script>
 		function checkBuffer() {
 
-			if (VideoManager) {
+			if (typeof VideoManager != "undefined") {
 				var buffer = VideoManager.getLatestBuffer();
 				console.log(buffer)
 			}
