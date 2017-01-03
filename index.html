@@ -32,20 +32,25 @@
 			    segmentDuration = video.duration / totalSegments;
 			    video.play();
 		    });
+
+		    checkBuffer(true)
 	    }
 
-		function checkBuffer() {
+		function checkBuffer(repeat) {
 			if (typeof VideoManager != "undefined") {
 				var buffer = VideoManager.getLatestBuffer();
 				if (typeof buffer != "undefined") {
 					sourceBuffer.appendBuffer(buffer);
+					repeat = false
 				}
 				else {
 				    console.log("No Buffer To Load")
                 }
 			}
 
-			setTimeout(checkBuffer, 100)
+			if (repeat) {
+				setTimeout(checkBuffer, 100)
+			}
 		}
     </script>
 </html>
