@@ -6,17 +6,49 @@
 	</body>
 
     <script>
-		function checkBuffer() {
+	    String.prototype.getBytes = function () {
+		    var bytes = [];
+		    for (var i = 0; i < this.length; ++i) {
+			    bytes.push(this.charCodeAt(i));
+		    }
+		    return bytes;
+	    };
 
+	    var video = document.querySelector('video');
+	    var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+
+	    var mediaSource = null;
+	    if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
+		    mediaSource = new MediaSource;
+		    video.src = URL.createObjectURL(mediaSource);
+		    mediaSource.addEventListener('sourceopen', sourceOpen);
+	    } else {
+		    console.error('Unsupported MIME type or codec: ', mimeCodec);
+	    }
+
+	    var sourceBuffer = null;
+	    function sourceOpen (_) {
+		    sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+		    video.addEventListener('timeupdate', checkBuffer);
+		    video.addEventListener('canplay', function () {
+			    segmentDuration = video.duration / totalSegments;
+			    video.play();
+		    });
+	    }
+
+		function checkBuffer() {
 			if (typeof VideoManager != "undefined") {
 				var buffer = VideoManager.getLatestBuffer();
-				console.log(buffer)
+				if (typeof buffer != "undefined") {
+					sourceBuffer.appendBuffer(buffer);
+				}
+				else {
+				    console.log("No Buffer To Load")
+                }
 			}
 
-            setTimeout(checkBuffer, 100)
-        }
-
-		checkBuffer();
+			setTimeout(checkBuffer, 100)
+		}
     </script>
 </html>
 
