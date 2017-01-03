@@ -39,7 +39,7 @@
 			if (typeof VideoManager != "undefined") {
 				var buffer = VideoManager.getLatestBuffer();
 				if (typeof buffer != "undefined") {
-					sourceBuffer.append(str2ab(buffer));
+					sourceBuffer.appendBuffer(str2ab(buffer));
 				}
 				else {
 				    console.log("No Buffer To Load");
