@@ -40,11 +40,11 @@
 			if (typeof VideoManager != "undefined") {
 				var buffer = VideoManager.getLatestBuffer();
 				if (typeof buffer != "undefined") {
-					sourceBuffer.appendBuffer(buffer);
+					sourceBuffer.appendBuffer(str2ab(buffer));
 					repeat = false
 				}
 				else {
-				    console.log("No Buffer To Load")
+				    console.log("No Buffer To Load");
                     repeat = true
                 }
 			}
@@ -53,6 +53,15 @@
 				setTimeout(checkBuffer, 100)
 			}
 		}
+
+	    function str2ab(str) {
+		    var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
+		    var bufView = new Uint16Array(buf);
+		    for (var i=0, strLen=str.length; i<strLen; i++) {
+			    bufView[i] = str.charCodeAt(i);
+		    }
+		    return buf;
+	    }
     </script>
 </html>
 
