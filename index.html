@@ -30,7 +30,8 @@
 		function checkBuffer() {
 			if (typeof VideoManager != "undefined") {
 				var buffer = VideoManager.getLatestBuffer();
-				if (typeof buffer != "undefined" && buffer.length >= 1024) {
+				if (typeof buffer != "undefined") {
+					console.log("Got buffer with length: " + buffer.length);
 					sourceBuffer.appendBuffer(str2ab(buffer));
 				}
 				else {
