@@ -32,6 +32,7 @@
 				var buffer = VideoManager.getLatestBuffer();
 				if (typeof buffer != "undefined") {
 					console.log("Got buffer with length: " + buffer.length);
+					console.log("Source buffer state:" + sourceBuffer.updating ? "Updating" : "Not Updating");
 					sourceBuffer.appendBuffer(b642ab(buffer));
 				}
 				else {
