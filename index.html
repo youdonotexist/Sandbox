@@ -30,7 +30,7 @@
 			if (typeof VideoManager != "undefined") {
 				var buffer = VideoManager.getLatestBuffer();
 				if (typeof buffer != "undefined") {
-					var byteArray = window.atob(buffer);
+					var byteArray = b642ab(buffer);
 					//console.log("Got Buffer: " + buffer);
 					console.log("Got buffer with length: " + byteArray.length);
 					console.log("Source buffer state:" + sourceBuffer.updating ? "Updating" : "Not Updating");
