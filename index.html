@@ -32,7 +32,7 @@
 				if (typeof buffer != "undefined") {
 					var byteArray = b642ab(buffer);
 					//console.log("Got Buffer: " + buffer);
-					console.log("Got buffer with length: " + byteArray.length);
+					console.log("Got buffer with length: " + byteArray.byteLength);
 					console.log("Source buffer state:" + sourceBuffer.updating ? "Updating" : "Not Updating");
 					sourceBuffer.appendBuffer(byteArray);
 				}
