@@ -19,7 +19,6 @@
 	    var sourceBuffer = null;
 	    function sourceOpen (_) {
 		    sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
-		    //video.addEventListener('timeupdate', checkBuffer);
 		    video.addEventListener('canplay', function () {
 			    video.play();
 		    });
@@ -31,9 +30,10 @@
 			if (typeof VideoManager != "undefined") {
 				var buffer = VideoManager.getLatestBuffer();
 				if (typeof buffer != "undefined") {
+					//var arrayBuffer = b642ab(buffer)
 					console.log("Got buffer with length: " + buffer.length);
 					console.log("Source buffer state:" + sourceBuffer.updating ? "Updating" : "Not Updating");
-					sourceBuffer.appendBuffer(b642ab(buffer));
+					sourceBuffer.appendBuffer(buffer);
 				}
 				else {
 				    console.log("No Buffer To Load");
