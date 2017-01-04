@@ -4,14 +4,6 @@
 	</body>
 
     <script>
-	    String.prototype.getBytes = function () {
-		    var bytes = [];
-		    for (var i = 0; i < this.length; ++i) {
-			    bytes.push(this.charCodeAt(i));
-		    }
-		    return bytes;
-	    };
-
 	    var video = document.querySelector('video');
 	    var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
 
@@ -38,7 +30,7 @@
 		function checkBuffer() {
 			if (typeof VideoManager != "undefined") {
 				var buffer = VideoManager.getLatestBuffer();
-				if (typeof buffer != "undefined") {
+				if (typeof buffer != "undefined" && buffer.length >= 1024) {
 					sourceBuffer.appendBuffer(str2ab(buffer));
 				}
 				else {
