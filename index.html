@@ -31,13 +31,12 @@
 				var buffer = VideoManager.getLatestBuffer();
 				if (typeof buffer != "undefined") {
 					var byteArray = b642ab(buffer);
-					//console.log("Got Buffer: " + buffer);
 					console.log("Got buffer with length: " + byteArray.byteLength);
 					console.log("Source buffer state:" + sourceBuffer.updating ? "Updating" : "Not Updating");
 					sourceBuffer.appendBuffer(byteArray);
 				}
 				else {
-				    console.log("No Buffer To Load");
+				    //console.log("No Buffer To Load");
                 }
 			}
 
