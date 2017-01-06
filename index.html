@@ -31,7 +31,7 @@
 			if (typeof VideoManager != "undefined") {
 				var buffer = VideoManager.getLatestBuffer();
 				if (typeof buffer != "undefined") {
-					var byteArray = b642ab(buffer);
+					var byteArray = new TextEncoder().encode(atob(buffer));
 					console.log("Got buffer with length: " + byteArray.byteLength);
 					console.log("Source buffer state:" + sourceBuffer.updating ? "Updating" : "Not Updating");
 					sourceBuffer.appendBuffer(byteArray);
@@ -44,7 +44,7 @@
             setTimeout(checkBuffer, 100)
 		}
 
-	    function b642ab(base64) {
+	    /*function b642ab(base64) {
 		    var binary_string =  window.atob(base64);
 		    var len = binary_string.length;
 		    var bytes = new Uint8Array( len );
@@ -52,7 +52,7 @@
 			    bytes[i] = binary_string.charCodeAt(i);
 		    }
 		    return bytes.buffer;
-	    }
+	    }*/
     </script>
 </html>
 
