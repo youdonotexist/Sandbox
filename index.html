@@ -1,6 +1,6 @@
 <html>
 	<body>
-		<video autoplay='autoplay' controls='controls'></video>
+		<video id="main-video" autoplay='autoplay' controls='controls'></video>
 	</body>
 
     <script>
@@ -23,7 +23,7 @@
 			    video.play();
 		    });
 
-		    VideoManager.start()
+		    VideoManager.start();
 		    checkBuffer()
 	    }
 
