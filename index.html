@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<style>
-			#second-video {float: bottom; position:absolute; bottom:0;}
+			#second-video {float: right; position:absolute; bottom:0;}
 		</style>
 
 	</head>
@@ -11,57 +11,5 @@
 
 		<video id="second-video" autoplay='autoplay' controls='controls'></video>
 	</body>
-
-    <script>
-	    var video = document.querySelector('video');
-	    var mimeCodec = 'video/mp4; codecs="avc1.4D4015, mp4a.40.2"';
-
-	    var mediaSource = null;
-	    if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
-		    mediaSource = new MediaSource;
-		    video.src = URL.createObjectURL(mediaSource);
-		    mediaSource.addEventListener('sourceopen', sourceOpen);
-	    } else {
-		    console.error('Unsupported MIME type or codec: ', mimeCodec);
-	    }
-
-	    var sourceBuffer = null;
-	    function sourceOpen (_) {
-		    sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
-		    video.addEventListener('canplay', function () {
-			    video.play();
-		    });
-
-		    VideoManager.start();
-		    checkBuffer()
-	    }
-
-		function checkBuffer() {
-			if (typeof VideoManager != "undefined") {
-				var buffer = VideoManager.getLatestBuffer();
-				if (typeof buffer != "undefined") {
-					var byteArray = b642ab(buffer);
-					console.log("Got buffer with length: " + byteArray.byteLength);
-					console.log("Source buffer state:" + sourceBuffer.updating ? "Updating" : "Not Updating");
-					sourceBuffer.appendBuffer(byteArray);
-				}
-				else {
-				    //console.log("No Buffer To Load");
-                }
-			}
-
-            setTimeout(checkBuffer, 10)
-		}
-
-	    function b642ab(base64) {
-		    var binary_string =  window.atob(base64);
-		    var len = binary_string.length;
-		    var bytes = new Uint8Array( len );
-		    for (var i = 0; i < len; i++)        {
-			    bytes[i] = binary_string.charCodeAt(i);
-		    }
-		    return bytes.buffer;
-	    }
-    </script>
 </html>
 
